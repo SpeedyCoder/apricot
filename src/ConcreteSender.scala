@@ -4,7 +4,7 @@ import java.net.Socket
 /**
   * Created by Sonal on 19/11/2016.
   */
-class ConcreteSender extends Sender {
+object ConcreteSender extends Sender {
 
   val skt = Bot.skt
   val to_exchange = new PrintWriter(skt.getOutputStream, true)
