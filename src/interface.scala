@@ -21,10 +21,19 @@ trait Manager{
 
   //  ACK ID
   def ack(id:Int)
-   // REJECT ID MSG
-   def reject(id:Int,msg:String)
+  // REJECT ID MSG
+  def reject(id:Int,msg:String)
   //FILL ID SYMBOL DIR PRICE SIZE
   def fill(id:Int,sym:Sym,buy:Boolean,price:Int,size:Int)
   //  OUT ID --not sure what it does
   def out(id:Int)
+}
+
+trait Sender{
+  type Sym=String
+  def hello(teamname:String)
+  def add(id:Int,sym:Sym,buy:Boolean,price:Int,size:Int)
+  def convert(id:Int,sym:Sym,buy:Boolean,size:Int)
+  def cancel(id:Int)
+
 }
