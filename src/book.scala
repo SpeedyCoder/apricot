@@ -78,10 +78,14 @@ class Book() {
 
 }
 
+class Order(val buy: Int, val comodity: String,
+		    val price :Int, val shares :Int)  {}
+
 class Inventory() {
 	private var cash = 0
 	private val comodities = new HashMap[String, Int]()
 	private val fairPrices = new HashMap[String, Int]()
+	private val orders = new HashMap[Int, Order]()
 	val book = new Book()
 
 	for (i <- 0 until Constants.equities.length) {
@@ -89,6 +93,19 @@ class Inventory() {
 		fairPrices.update(Constants.equities(i), -1)
 	}
 	fairPrices.update("BOND", 1000)
+
+	def addOrder(id :Int, comodity: String, price :Int, shares :Int) = {
+		val order = new Order(id, comodity, price, shares)
+		orders.update(id, order)
+	}
+
+	def getOrder(id :Int): Order = {
+		return orders.get(id)
+	}
+
+	def cancelOrder(id :Int) = {
+		orders -= id
+	}
 
 	def setCash(newCash :Int) {
 		cash = newCash
@@ -139,6 +156,14 @@ object MyManager {
 		for( i <- 0 until syms.length) {
 			inventory.setComodities(syms(i)._1, syms(i)._2)
 		}
+	}
+
+	def open(Array(String)) = {
+
+	}
+
+	def class(Array(String)) = {
+		
 	}
 }
 
