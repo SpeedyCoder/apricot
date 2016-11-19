@@ -13,7 +13,7 @@ object MyManager extends Manager{
 	}
 
 	def close(l :Array[String]) = {
-		
+		Inventory.reset()
 	}
 
 	def ack(id: Int): Unit = {

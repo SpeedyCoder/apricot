@@ -17,6 +17,17 @@ object Inventory {
 	}
 	fairPrices.update("BOND", 1000)
 
+	def reset() = {
+		cash = 0
+		activeOrders.clear()
+		proposedOrders.clear()
+		for (i <- 0 until Constants.equities.length) {
+			comodities.update(Constants.equities(i), 0)
+			fairPrices.update(Constants.equities(i), -1)
+		}
+		fairPrices.update("BOND", 1000)
+	}
+
 	def addProposedOrder(buy : Boolean, id :Int, comodity: String, price :Int, shares :Int) = {
 		val order = new Order(buy, comodity, price, shares)
 		proposedOrders.update(id, order)
