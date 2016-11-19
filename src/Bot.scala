@@ -8,7 +8,7 @@ import scala.util.parsing.json
 
 object Bot {
   def main(args: Array[String]): Unit = {
-    val manager: Manager = null
+    val manager: Manager = new MyManager()
     while (true) {
       try {
         val skt: Socket = new Socket("test-exch-apricot", 25000)

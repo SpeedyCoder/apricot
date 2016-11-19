@@ -1,4 +1,4 @@
-object MyManager extends Manager{
+class MyManager extends Manager{
 	val inventory = new Inventory()
 
 	def hello(cash :Int, syms :Array[(String, Int)]) = {
@@ -17,7 +17,7 @@ object MyManager extends Manager{
 	}
 
 	def ack(id: Int): Unit = {
-		
+
 	}
 
   	def book(sym: String, buys: Array[(Int, Int)], sells: Array[(Int, Int)]): Unit = {
@@ -34,19 +34,19 @@ object MyManager extends Manager{
 
   	// Order has been fulfilled
   	def fill(id: Int, sym: String, buy: Boolean, price: Int, size: Int): Unit = {
-  		
+
   	}
 
   	def out(id: Int): Unit = {
-  		
+
   	}
 
   	// Order has been rejected
   	def reject(id: Int, msg: String): Unit = {
-  		
+
   	}
 
   	def trade(sym: String, price: Int, size: Int): Unit = {
-  		
+
   	}
 }
