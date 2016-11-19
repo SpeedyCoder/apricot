@@ -35,10 +35,12 @@ object MyManager extends Manager{
   				sender.addNew("BOND", true, sells(0)._1, sells(0)._2)
   			}
   		}
-  		Inventory.book.updateBuys(sym, buys)
-  		Inventory.book.updateSells(sym, sells)
-  		Inventory.setDefaultFairPrice(sym)
-  		Inventory.penny(sender, sym)
+  		if (sym != "BOND") {
+  			Inventory.book.updateBuys(sym, buys)
+	  		Inventory.book.updateSells(sym, sells)
+	  		Inventory.setDefaultFairPrice(sym)
+	  		Inventory.penny(sender, sym)
+  		}
   	}
 
   	def error(msg: String): Unit = {
