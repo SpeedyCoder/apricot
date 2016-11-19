@@ -3,7 +3,7 @@ import scala.collection.mutable.HashMap
 class Order(val buy: Boolean, val comodity: String,
 		    val price :Int, var size :Int)  {}
 
-class Inventory() {
+object Inventory {
 	private var cash = 0
 	private val comodities = new HashMap[String, Int]()
 	private val fairPrices = new HashMap[String, Int]()

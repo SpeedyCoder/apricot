@@ -1,10 +1,9 @@
 class MyManager extends Manager{
-	val inventory = new Inventory()
 
 	def hello(cash :Int, syms :Array[(String, Int)]) = {
-		inventory.setCash(cash)
+		Inventory.setCash(cash)
 		for( i <- 0 until syms.length) {
-			inventory.setComodities(syms(i)._1, syms(i)._2)
+			Inventory.setComodities(syms(i)._1, syms(i)._2)
 		}
 	}
 
@@ -17,21 +16,21 @@ class MyManager extends Manager{
 	}
 
 	def ack(id: Int): Unit = {
-		inventory.addActiveOrder(id)
+		Inventory.addActiveOrder(id)
 	}
 
 	// Order has been rejected
   	def reject(id: Int, msg: String): Unit = {
   		println(msg)
-  		inventory.removeProposedOrder(id)
+  		Inventory.removeProposedOrder(id)
   	}
 
   	def book(sym: String, buys: Array[(Int, Int)], sells: Array[(Int, Int)]): Unit = {
   		if (sym == "BOND") {
   			// Do something
   		}
-  		inventory.book.updateBuys(sym, buys)
-  		inventory.book.updateSells(sym, sells)
+  		Inventory.book.updateBuys(sym, buys)
+  		Inventory.book.updateSells(sym, sells)
   	}
 
   	def error(msg: String): Unit = {
@@ -40,11 +39,11 @@ class MyManager extends Manager{
 
   	// Order has been fulfilled
   	def fill(id: Int, sym: String, buy: Boolean, price: Int, size: Int): Unit = {
-  		inventory.fillOrder(id, sym, buy, price, size)
+  		Inventory.fillOrder(id, sym, buy, price, size)
   	}
 
   	def out(id: Int): Unit = {
-  		inventory.cancelActiveOrder(id)
+  		Inventory.cancelActiveOrder(id)
   	}
 
   	def trade(sym: String, price: Int, size: Int): Unit = {
