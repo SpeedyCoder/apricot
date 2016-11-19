@@ -7,8 +7,23 @@ import scala.util.parsing.json
 
 
 object Bot {
-  final val skt: Socket = new Socket("test-exch-apricot", 20000)
+  var server: String = "test-exch-apricot"
+  var port = 20000
+  final var skt: Socket = new Socket("test-exch-apricot", 20000)
   def main(args: Array[String]): Unit = {
+    // Usage scala Bot [-s servername] [-p port]
+    if (args.length > 0) {
+      var i = 0
+      while (i < args.length) {
+        if (args(i) == "-s") {
+          server = args(i+1)
+          i += 2
+        } else if (args(i) == "-p") {
+          port = args(i+1).toInt
+          i += 2
+        }
+      }
+    }
     val manager: Manager = new ManagePrint(MyManager)
     try {
       val from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream))
@@ -18,9 +33,8 @@ object Bot {
       while (true) {
         val lastLine = from_exchange.readLine()
         if (lastLine == null) {
-          print("last line read was null, idk why, figure it out")
         } else {
-          var reply = lastLine.trim()
+          val reply = lastLine.trim()
           val reply_array: Array[String] = reply.split(" ")
           reply_array(0) match {
             case "HELLO" =>
