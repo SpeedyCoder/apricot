@@ -15,17 +15,17 @@ class ConcreteSender extends Sender {
   }
 
   override def add(id: Int, sym: Sym, buy: Boolean, price: Int, size: Int): Unit = {
-    var str = s"ADD $id $sym ${if (buy) "BUY" else "SELL"} $price $size"
+    val str = "ADD " + id + " " + sym  + " " + (if (buy) "BUY " else "SELL ") + price + " " + size
     to_exchange.println(str)
   }
 
   override def convert(id: Int, sym: Sym, buy: Boolean, size: Int): Unit = {
-    var str = s"CONVERT $id $sym ${if (buy) "BUY" else "SELL"} $size"
+    val str = "CONVERT " + id + " " + sym + (if (buy) " BUY " else " SELL ") + size
     to_exchange.println(str)
   }
 
   override def cancel(id: Int): Unit = {
-    var str = s"CANCEL $id"
+    val str = "CANCEL " + id
     to_exchange.println(str)
   }
 }
