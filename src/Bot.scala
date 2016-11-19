@@ -10,12 +10,12 @@ object Bot {
   final val skt: Socket = new Socket("test-exch-apricot", 20000)
   def main(args: Array[String]): Unit = {
     val manager: Manager = MyManager
-    while (true) {
-      try {
-        val from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream))
-        val to_exchange = new PrintWriter(skt.getOutputStream, true)
+    try {
+      val from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream))
+      val to_exchange = new PrintWriter(skt.getOutputStream, true)
 
-        to_exchange.println("HELLO APRICOT")
+      to_exchange.println("HELLO APRICOT")
+      while (true) {
         var reply = from_exchange.readLine().trim()
         val reply_array: Array[String] = reply.split(" ")
         reply_array(0) match {
@@ -29,7 +29,7 @@ object Bot {
             manager.error(reply_array(1))
           case "BOOK" =>
             val indexOfSELL = reply_array.indexOf("SELL")
-            manager.book(reply_array(1), reply_array.slice(3, indexOfSELL).map(colonToIIPair(_)), reply_array.slice(1+indexOfSELL, reply_array.length).map(colonToIIPair(_)))
+            manager.book(reply_array(1), reply_array.slice(3, indexOfSELL).map(colonToIIPair(_)), reply_array.slice(1 + indexOfSELL, reply_array.length).map(colonToIIPair(_)))
           case "TRADE" =>
             manager.trade(reply_array(1), reply_array(2).toInt, reply_array(3).toInt)
           case "ACK" =>
