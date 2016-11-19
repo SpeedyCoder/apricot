@@ -78,7 +78,7 @@ class Book() {
 
 }
 
-class Order(val buy: Int, val comodity: String,
+class Order(val buy: Boolean, val comodity: String,
 		    val price :Int, val shares :Int)  {}
 
 class Inventory() {
@@ -94,13 +94,13 @@ class Inventory() {
 	}
 	fairPrices.update("BOND", 1000)
 
-	def addOrder(id :Int, comodity: String, price :Int, shares :Int) = {
-		val order = new Order(id, comodity, price, shares)
+	def addOrder(buy : Boolean, id :Int, comodity: String, price :Int, shares :Int) = {
+		val order = new Order(buy, comodity, price, shares)
 		orders.update(id, order)
 	}
 
 	def getOrder(id :Int): Order = {
-		return orders.get(id)
+		return orders.get(id).get
 	}
 
 	def cancelOrder(id :Int) = {
@@ -116,20 +116,19 @@ class Inventory() {
 	}
 
 	def buy(name :String, num :Int, price :Int) = {
-		val Some(old) = comodities.get(name)
+		val old = comodities.get(name).get
 		comodities.update(name, old + num)
 		cash -= num*price
 	}
 
 	def sell(name :String, num :Int, price :Int) = {
-		val Some(old) = comodities.get(name)
+		val old = comodities.get(name).get
 		comodities.update(name, old - num)
 		cash += num*price
 	}
 
-	def getFairPrice(name :String): Int = {
-		val Some(res) = fairPrices.get(name)
-		return res
+	def getFairPrice(name :String): Int = { 
+		return fairPrices.get(name).get
 	}
 
 	def setFairPrice(name :String, price :Int) = {
@@ -158,11 +157,11 @@ object MyManager {
 		}
 	}
 
-	def open(Array(String)) = {
+	def open(l :Array[String]) = {
 
 	}
 
-	def class(Array(String)) = {
+	def close(l :Array[String]) = {
 		
 	}
 }

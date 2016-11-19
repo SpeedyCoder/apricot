@@ -3,9 +3,8 @@
   */
 
 
-type Sym=String
-
 trait Manager{
+  type Sym=String
   //HELLO CASH SYM:POSN SYM:POSN ...
   def hello(cash:Int,syms:Array[(Sym,Int)])
   //OPEN SYM SYM SYM ...
