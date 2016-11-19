@@ -67,6 +67,8 @@ object Bot {
         } catch {
           case npe: NullPointerException => print("NPE caught:\n" + npe.getMessage)
           case e: Exception => print("Some other exception caught:\n" + e.getMessage)
+        } finally {
+          skt.close()
         }
     }
   }
