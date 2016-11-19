@@ -2,7 +2,7 @@
   * Created by Toby Cathcart Burn on 19/11/2016.
   */
 
-/*
+
 class ManagePrint(val manager:Manager) extends Manager{
   type Sym=String
   //HELLO CASH SYM:POSN SYM:POSN ...
@@ -49,4 +49,4 @@ class ManagePrint(val manager:Manager) extends Manager{
     println("out")
     manager.out(id)
   }
-}*/
+}
