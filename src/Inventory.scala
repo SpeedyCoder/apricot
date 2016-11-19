@@ -1,3 +1,5 @@
+import scala.collection.mutable.HashMap
+
 class Order(val buy: Boolean, val comodity: String,
 		    val price :Int, var size :Int)  {}
 
@@ -20,16 +22,31 @@ class Inventory() {
 		proposedOrders.update(id, order)
 	}
 
+	def removeProposedOrder(id :Int) = {
+		proposedOrders.remove(id)
+	}
+
 	def addActiveOrder(id :Int) = {
-		val order = 
+		val order = proposedOrders.remove(id).get
+		activeOrders.update(id, order)
+	}
+
+	def cancelActiveOrder(id :Int) = {
+		activeOrders.remove(id)
 	}
 
 	def getOrder(id :Int): Order = {
 		return activeOrders(id)
 	}
 
-	def cancelOrder(id :Int) = {
-		activeOrders -= id
+	def fillOrder(id: Int, comodity: String, isBuy: Boolean, price: Int, size: Int) = {
+		activeOrders(id).size -= size
+
+		if (isBuy) {
+			buy(comodity, price, size)
+		} else {
+			sell(comodity, price, size)
+		}
 	}
 
 	def setCash(newCash :Int) {
