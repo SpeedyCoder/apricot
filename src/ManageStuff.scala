@@ -1,10 +1,5 @@
-/**
-  * Created by Toby Cathcart Burn on 19/11/2016.
-  */
-
 
 class ManagePrint(val manager:Manager) extends Manager{
-  type Sym=String
   //HELLO CASH SYM:POSN SYM:POSN ...
   def hello(cash:Int,syms:Array[(Sym,Int)]){
     manager.hello(cash,syms)
@@ -15,18 +10,21 @@ class ManagePrint(val manager:Manager) extends Manager{
     manager.open(syms)
   }
   //CLOSE SYM SYM SYM ...
-  def close(syms:Array[Sym])
-    println("OPEN "+syms.toString)
+  def close(syms:Array[Sym]){
+    println("OPEN "+syms.toString)}
   //ERROR MSG
   def error(msg:String){
     manager.error(msg)
   }
 
   //  BOOK SYMBOL BUY PRICE:SIZE PRICE:SIZE ... SELL PRICE:SIZE PRICE:SIZE ...
-  def book(sym :Sym,buys:Array[(Int,Int)],sells:Array[(Int,Int)])
+  def book(sym :Sym,buys:Array[(Int,Int)],sells:Array[(Int,Int)]){
+    manager.book(sym,buys,sells)
+  }
   //TRADE SYMBOL PRICE SIZE
   def trade(sym:Sym,price:Int,size:Int){
-    println("trade "+syms.toString)
+    println("trade "+sym)
+    println("Price "+price.toString)
     manager.trade(sym,price,size)
   }
 
