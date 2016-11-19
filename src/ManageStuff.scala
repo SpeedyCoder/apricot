@@ -23,8 +23,9 @@ class ManagePrint(val manager:Manager) extends Manager{
   }
   //TRADE SYMBOL PRICE SIZE
   def trade(sym:Sym,price:Int,size:Int){
+    if(sym=="BOND"){
     println("trade "+sym)
-    println("Price "+price.toString)
+    println("Price "+price.toString)}
     manager.trade(sym,price,size)
   }
 
