@@ -90,6 +90,14 @@ class Inventory() {
 	}
 	fairPrices.update("BOND", 1000)
 
+	def setCash(newCash :Int) {
+		cash = newCash
+	}
+
+	def setComodities(name :String, num :Int) = {
+		comodities.update(name, num)
+	}
+
 	def buy(name :String, num :Int, price :Int) = {
 		val Some(old) = comodities.get(name)
 		comodities.update(name, old + num)
@@ -119,6 +127,17 @@ class Inventory() {
 	def setAllDefaultFairPrices() = {
 		for (i<- 1 until Constants.equities.length) {
 			setDefaultFairPrice(Constants.equities(i))
+		}
+	}
+}
+
+object MyManager {
+	val inventory = new Inventory()
+
+	def hello(cash :Int, syms :Array[(String, Int)]) = {
+		inventory.setCash(cash)
+		for( i <- 0 until syms.length) {
+			inventory.setComodities(syms(i)._1, syms(i)._2)
 		}
 	}
 }
