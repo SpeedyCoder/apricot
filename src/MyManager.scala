@@ -1,4 +1,5 @@
 object MyManager extends Manager{
+	val sender = new SenderHelp(ConcreteSender)
 
 	def hello(cash :Int, syms :Array[(String, Int)]) = {
 		Inventory.setCash(cash)
