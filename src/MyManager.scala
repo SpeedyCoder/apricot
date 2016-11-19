@@ -37,6 +37,8 @@ object MyManager extends Manager{
   		}
   		Inventory.book.updateBuys(sym, buys)
   		Inventory.book.updateSells(sym, sells)
+  		Inventory.setDefaultFairPrice(sym)
+  		Inventory.penny(sender, sym)
   	}
 
   	def error(msg: String): Unit = {

@@ -20,12 +20,21 @@ class Comodity() {
 		buys = newBuys
 	}
 
-	def getBestBuy(): (Int, Int) = {
-		return buys(0)
+	def getBestBuy(): Int = {
+		if (buys.length > 0) {
+			return buys(0)._1
+		} else {
+			return -1
+		}
+		
 	}
 
-	def getBestSell(): (Int, Int) = {
-		return sells(0)
+	def getBestSell(): Int = {
+		if (sells.length > 0) {
+			return sells(0)._1
+		} else {
+			return -1
+		}
 	}
 }
 
@@ -68,11 +77,11 @@ class Book() {
 		comodities(name).updateBuys(newBuys)
 	}
 
-	def getBestBuy(name: String): (Int, Int) = {
+	def getBestBuy(name: String): Int = {
 		return comodities(name).getBestBuy
 	}
 
-	def getBestSell(name: String): (Int, Int) = {
+	def getBestSell(name: String): Int = {
 		return comodities(name).getBestSell
 	}
 

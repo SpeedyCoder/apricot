@@ -1,4 +1,4 @@
-class SenderHelp(val send:Sender){
+class SenderHelp(val send:Sender) extends Sender{
   var localId=0
   
   def hello(teamname:String) =send.hello(teamname)

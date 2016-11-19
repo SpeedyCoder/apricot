@@ -89,7 +89,7 @@ object Inventory {
 	}
 
 	def setDefaultFairPrice(name :String) = {
-		val price = (book.getBestSell(name)._1 + book.getBestBuy(name)._1)/2
+		val price = (book.getBestSell(name) + book.getBestBuy(name))/2
 		setFairPrice(name, price)
 	}
 
@@ -97,5 +97,51 @@ object Inventory {
 		for (i<- 1 until Constants.equities.length) {
 			setDefaultFairPrice(Constants.equities(i))
 		}
+	}
+
+	def cancel(sender :SenderHelp, sym: String) = {
+		for ((id, order) <- activeOrders) {
+			if (order.comodity == sym) {
+				sender.cancel(id)
+			}
+		}
+	}
+ 
+	def update(sender :SenderHelp, sym :String, bestBuy :Int, bestSell: Int) = {
+		var haveBuys = false
+		var haveSells = false
+		for ((id, order) <- activeOrders) {
+			if (order.buy) {
+				if (order.comodity == sym && order.price < bestBuy) {
+					sender.cancel(id)
+				} else if (order.comodity == sym && order.price == bestBuy) {
+					haveBuys = true
+				}
+			} else {
+				if (order.comodity == sym && order.price > bestSell) {
+					sender.cancel(id)
+				} else if (order.comodity == sym && order.price == bestSell) {
+					haveSells = true
+				}
+			}
+		}
+
+		if (!haveBuys) {
+			sender.addNew(sym, true, bestBuy+1 , 50)
+		}
+		if (!haveSells) {
+			sender.addNew(sym, true, bestSell-1 , 50)
+		}
+	}
+
+	def penny(sender :SenderHelp, sym: String) = {
+		val bestBuy = book.getBestBuy(sym)
+		val bestSell = book.getBestSell(sym)
+		if (bestBuy == -1 || bestSell == -1) {
+			cancel(sender, sym)
+		} else {
+			update(sender, sym, bestBuy, bestSell)
+		}
+
 	}
 }
