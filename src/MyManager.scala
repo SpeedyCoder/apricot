@@ -17,8 +17,14 @@ class MyManager extends Manager{
 	}
 
 	def ack(id: Int): Unit = {
-
+		inventory.addActiveOrder(id)
 	}
+
+	// Order has been rejected
+  	def reject(id: Int, msg: String): Unit = {
+  		println(msg)
+  		inventory.removeProposedOrder(id)
+  	}
 
   	def book(sym: String, buys: Array[(Int, Int)], sells: Array[(Int, Int)]): Unit = {
   		if (sym == "BOND") {
@@ -34,16 +40,11 @@ class MyManager extends Manager{
 
   	// Order has been fulfilled
   	def fill(id: Int, sym: String, buy: Boolean, price: Int, size: Int): Unit = {
-
+  		inventory.fillOrder(id, sym, buy, price, size)
   	}
 
   	def out(id: Int): Unit = {
-
-  	}
-
-  	// Order has been rejected
-  	def reject(id: Int, msg: String): Unit = {
-
+  		inventory.cancelActiveOrder(id)
   	}
 
   	def trade(sym: String, price: Int, size: Int): Unit = {
