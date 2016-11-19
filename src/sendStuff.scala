@@ -4,6 +4,7 @@ class SenderHelp(val send:Sender) extends Sender{
   def hello(teamname:String) =send.hello(teamname)
   def add(id:Int,sym:String,buy:Boolean,price:Int,size:Int) = send.add(id,sym,buy,price,size)
   def addNew(sym:String, buy:Boolean, price:Int, size:Int) = {
+    println("trying to trade")
     localId+=1;
     Inventory.addProposedOrder(buy, localId , sym, price, size)
     send.add(localId,sym,buy,price,size);
