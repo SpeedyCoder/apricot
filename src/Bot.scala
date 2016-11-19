@@ -4,10 +4,10 @@ import java.io.InputStreamReader
 import java.io.BufferedReader
 import java.net.Socket
 
-class Bot {
+object Bot {
   def main(args: Array[String]): Unit = {
     try {
-      val skt: Socket = new Socket("test-exch-teamname", 20000)
+      val skt: Socket = new Socket("test-exch-apricot", 20000)
       val from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream))
       val to_exchange = new PrintWriter(skt.getOutputStream, true)
 
