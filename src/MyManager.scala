@@ -6,11 +6,15 @@ object MyManager extends Manager{
 		for( i <- 0 until syms.length) {
 			Inventory.setComodities(syms(i)._1, syms(i)._2)
 		}
+        bond()
 	}
 
-	def open(l :Array[String]) = {
-
+	def open(l :Array[String]) = {bond()
 	}
+    def bond() ={
+      sender.addNew("BOND",false,1001,100)
+      sender.addNew("BOND",true,999,100)
+    }
 
 	def close(l :Array[String]) = {
 		Inventory.reset()

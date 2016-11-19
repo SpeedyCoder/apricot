@@ -2,16 +2,19 @@
 class ManagePrint(val manager:Manager) extends Manager{
   //HELLO CASH SYM:POSN SYM:POSN ...
   def hello(cash:Int,syms:Array[(Sym,Int)]){
+    print("hi")
     manager.hello(cash,syms)
   }
   //OPEN SYM SYM SYM ...
   def open(syms:Array[Sym]){
-    println("OPEN "+syms.toString)
+    println("CLOSE "+syms(0))
     manager.open(syms)
   }
   //CLOSE SYM SYM SYM ...
   def close(syms:Array[Sym]){
-    println("OPEN "+syms.toString)}
+    println("CLOSE "+syms(0))
+    manager.close(syms)
+    }
   //ERROR MSG
   def error(msg:String){
     manager.error(msg)
