@@ -18,14 +18,14 @@ trait Manager{
   //  BOOK SYMBOL BUY PRICE:SIZE PRICE:SIZE ... SELL PRICE:SIZE PRICE:SIZE ...
   def book(sym :Sym,buys:Array[(Int,Int)],sells:Array[(Int,Int)])
   //TRADE SYMBOL PRICE SIZE
-  def trade(Sym,Array[(Int,Int)],Array[(Int,Int)])
+  def trade(sym:Sym,price:Int,size:Int)
 
   //  ACK ID
-  def error(Sym,Array[(Int,Int)],Array[(Int,Int)])
+  def ack(id:Int)
    // REJECT ID MSG
-   def reject(Int,String)
+   def reject(id:Int,msg:String)
   //FILL ID SYMBOL DIR PRICE SIZE
-  def fill(id:Int,)
+  def fill(id:Int,sym:Sym,buy:Boolean,price:Int,size:Int)
   //  OUT ID --not sure what it does
-  def out(Int)
+  def out(id:Int)
 }
