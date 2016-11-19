@@ -28,7 +28,12 @@ object MyManager extends Manager{
 
   	def book(sym: String, buys: Array[(Int, Int)], sells: Array[(Int, Int)]): Unit = {
   		if (sym == "BOND") {
-  			// Do something
+  			if (buys.length > 0 && buys(0)._1 > 1001) {
+  				sender.addNew("BOND", false, buys(0)._1, buys(0)._2)
+  			}
+  			if (sells.length > 0 && sells(0)._1 < 999) {
+  				sender.addNew("BOND", true, sells(0)._1, sells(0)._2)
+  			}
   		}
   		Inventory.book.updateBuys(sym, buys)
   		Inventory.book.updateSells(sym, sells)
