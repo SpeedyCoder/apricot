@@ -29,7 +29,7 @@ class Comodity() {
 	}
 }
 
-class Book() {
+object Constants {
 	val equities = Array(
 		"BOND",  // worth 1000 all the time
 		"VALBZ", // regular
@@ -44,10 +44,12 @@ class Book() {
 		"VALE",  // ETF for VALBZ
 		"XLF"    // ETF
 	)
+}
 
+class Book() {
 	private val comodities = new HashMap[String, Comodity]()
-	for (i <- 0 until equities.length) {
-		comodities.put(equities(i), new Comodity())
+	for (i <- 0 until Constants.equities.length) {
+		comodities.update(Constants.equities(i), new Comodity())
 	} 
 
 	def getBuys(name: String) :Array[(Int, Int)] = {
@@ -78,6 +80,47 @@ class Book() {
 
 class Inventory() {
 	private var cash = 0
+	private val comodities = new HashMap[String, Int]()
+	private val fairPrices = new HashMap[String, Int]()
+	val book = new Book()
+
+	for (i <- 0 until Constants.equities.length) {
+		comodities.update(Constants.equities(i), 0)
+		fairPrices.update(Constants.equities(i), -1)
+	}
+	fairPrices.update("BOND", 1000)
+
+	def buy(name :String, num :Int, price :Int) = {
+		val Some(old) = comodities.get(name)
+		comodities.update(name, old + num)
+		cash -= num*price
+	}
+
+	def sell(name :String, num :Int, price :Int) = {
+		val Some(old) = comodities.get(name)
+		comodities.update(name, old - num)
+		cash += num*price
+	}
+
+	def getFairPrice(name :String): Int = {
+		val Some(res) = fairPrices.get(name)
+		return res
+	}
+
+	def setFairPrice(name :String, price :Int) = {
+		fairPrices.update(name, price)
+	}
+
+	def setDefaultFairPrice(name :String) = {
+		val price = (book.getBestSell(name)._1 + book.getBestBuy(name)._1)/2
+		setFairPrice(name, price)
+	}
+
+	def setAllDefaultFairPrices() = {
+		for (i<- 1 until Constants.equities.length) {
+			setDefaultFairPrice(Constants.equities(i))
+		}
+	}
 }
 
 
