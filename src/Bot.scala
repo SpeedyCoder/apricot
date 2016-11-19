@@ -7,7 +7,7 @@ import java.net.Socket
 object Bot {
   def main(args: Array[String]): Unit = {
     try {
-      val skt: Socket = new Socket("APRICOT", 20000)
+      val skt: Socket = new Socket("test-exch-apricot", 20000)
       val from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream))
       val to_exchange = new PrintWriter(skt.getOutputStream, true)
 
