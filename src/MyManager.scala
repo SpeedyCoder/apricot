@@ -1,4 +1,4 @@
-class MyManager extends Manager{
+object MyManager extends Manager{
 
 	def hello(cash :Int, syms :Array[(String, Int)]) = {
 		Inventory.setCash(cash)
