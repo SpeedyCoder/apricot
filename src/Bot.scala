@@ -9,7 +9,7 @@ import scala.util.parsing.json
 object Bot {
   final val skt: Socket = new Socket("test-exch-apricot", 20000)
   def main(args: Array[String]): Unit = {
-    val manager: Manager = ManagePrint(MyManager)
+    val manager: Manager = new ManagePrint(MyManager)
     try {
       val from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream))
       val to_exchange = new PrintWriter(skt.getOutputStream, true)
